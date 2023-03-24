@@ -1,0 +1,46 @@
+There are number of changes required in settings.py when deploying the project in Production Environment.
+Diff. config of settings.py for diffferent environments.
+doesn't matter whats the name of settings file and where it is placed until the correct path is mentioned in the manage.py file under os.environ.setdefault().
+we can put multiple settings file for diff env(local.py for local and production.py for production environment) under same setting folder and file related to either of the env will load ased on the condition DEBUG = True/False ( True for local and False for Production). We provide condition in manage.py file.
+DEUG = True, means local and the diagnostic report will be visible on webpage if any error occurs to unauhtrised users too, but in production it is False, so that things are only visile at terminal.
+importing base.py file to either of the setting files we can resuse the code and with less code we can run server for each environment.
+When server runs for local env, then we get O/P as " Django version 4.1.7, using settings 'core.settings.local' "
+ALLOWED_HOSTS = [] is a security measure which prevents HTTP host header attacks. So when app is in prod server, we need to define the allowed host which can be a list of strings representing all the host domain names that Django sites can be served on, "which typically is the IP address of the server" - this is a production setting
+When server runs for local env, then we get O/P as " Django version 4.1.7, using settings 'core.settings.production' "
+By default every Django project has Secret Key which is genrated during the project building at start.
+Secret key is not public and is used to provide cryptographic signing
+min length of secret key can be 1 character but it should be preferebly long.
+We can use manage.py shell to use python and gen secret key
+in shell:
+>>> from django.core.management.utils import get_random_secret_key
+>>> print(get_random_secret key())
+
+We can use seperate secret keys for local and production env.
+Building list of installed packages helps in replicating the project
+
+--------------------------------------------------------------------------------------------
+Creting Environment Varibles gives extra security to the sensitive data by hooking the data outside of the program and use the data whenever required.
+Avoid secret keys and passwords to be accessexdc easily by anyone. So we create environmernt varibles in native OS.
+We install python-dotenv package using pip and the create a .env file along with manage.py file
+We brush all ther sensitive data from settings.py and save it in .env file created.
+We need to hook .env file with settings.py file else server won't run ( for e.g. without secret key server won't run)
+we import load_dotenv from dotenv and use load_dotenv(). again, environment variables are stored in OS, so we need OS module of python to get those variables
+So we import os and use os.environ.get() method.
+
+----------------------------------------------------------------------------------------------
+
+TESTING - Pytest First Steps
+
+> pytest is used for tesitng purposes.
+> created a pytest.ini file along with manage.py which is a configuration file that contains key value pairs.
+> pytest -h shows all the key-value pairs that can be configured.
+> all tests are written in .py files under tests folder and a run using pytest command.
+>
+>We use classes or functions to make test files.
+
+-----------------------------------------------------------------------------------------------
+
+. Source Control helps tracking the changes and managing the changes.
+. We create a repository on github and clone it local. 
+After cloning we put all the project related data to the folder.
+. Some files that we do not need to push on version control, we put that files and folders in .gitignore file. So that every time we commit changes, thiose are ignored by git. Like .env file, __pycahce__ file , it needs to be ignored.

@@ -1,0 +1,55 @@
+$ django-admin startproject <project_name> .(refers to curent directory) : this command creates a django project and adds all the required files for building the project.
+$ python3 manage.py runserver : this command runs the light weight server provided by django.
+The lightweight server is only for development purpose, but for production uses(deployment), several packages needs to be installed 
+Django server will run at https://127.0.0.1/8000 without any requirement of app.
+We get response "GET / HTTP/1.1" 200 <process_id> if the server runs fine.
+To create an app inside the python project we use - $python3 manage.py startapp <app_name>  OR $./manage.py startapp <app_name> 
+app_name must not be reseve python keywords.
+Building apps outside project folder makes it easy to build & manage the apps and project as a whole differently. (Ensuring Modularity)     
+APP v/s PROJECT : A project refers to the entire application and all its parts(config files and apps). An app refers to a submodule of the project dealing with specific use case. It's self-sufficient and not intertwined with the other apps in the project  and is written to perform business logic.
+Once an app is build, register the app in the "settings.py" file by adding appname in the installed apps section at line 33 to let the Django project server know about the app and allow server to check for the app files when required.
+If the Django server is running,it checks for the errors for evvery small changes made and provides error related info if any error occurs.
+Everytime we make any changes to the app/project codes, the django server will restart.
+If we want to run server on any specific port we use: $python3 manage.py runserver <port_no.>
+Django provides built-in admin site which can be accessed by http://127.0.0.1/8000/admin/
+
+REQUEST-RESPONSE Django:
+> User created request on browser and bbrowser sends http request to the IP address of the domain. 
+> Server(can be nginx or apache) at IP address inspects the req.and if aware of, it passes the request Django app.
+> Django app inspects the data sent by the user i.e. URL and matches it with the URL mapping present in urls.py of the app.
+> If matched, means user has requested URL from our django app and and the request is passed to corresponding mapped view which in turn contains business login to be performed.
+> View contained in views.py connects with database and templates and perform required action for sending the response using db or templates(images)
+> Views generally contains business login and the function performed by the app.
+> View takes data from db and combines it with template and renders the data. 
+> rendered data is then passed to the browser as HTTPResponse and at browser it is rendered again and Webpage is produced and shown to the user.
+> This above procedure is an example of Traditional Django Workflow
+> NOTE: django app will only respond when the URL enetered by the user matches with mentioned uRL in urls.py 
+
+UNIQUE URL PATTERNS in DJANGO: 
+
+i)  "" - blank URL route pattern refers to the root directory. i.e. if we remove admin/ from path('admin/', admin.site.urls) and make it as path('', admin.site.urls), then we can access admin portal on http://127.0.0.0:8000 only. Also we can change the route pattern as per our requirement.
+ii) while defining path in the URL, we map the given route pattern with corresponding view in views.py
+iii) all the URLs related on single app can be mentioned in <app_name>.urls.py file and then eing imported into urls.py file of the main project, so as to allow URLS of multiple apps distinct and ensuring modularity.
+iv) to import urls from other apps, we use 'include' feature from django.urls 
+v) importing URLS mapped with views in newapp app, we did : path('', include('newapp.urls'))
+vi) whatever mentioned in route pattern is successor of by localhost:8000/
+NOTE: URLS are connected to views.
+
+URLS and VIEWS: 
+
+> We can build dango views using python classes or python methods.
+> while using functions request(httprequest) object is passed as parameter to the function.
+> function name in views is same as the view defined in URL patern in urls.py 
+> if we are getting a HttpRequest, we need to send Httpresponse from the view.
+
+VIEWS and TEMPLATES and USING IT AS RESPONSE: 
+
+> Web pages to be returned are created as templates and stored in template folder.
+> Django will automatically inspect for 'templates' folder and looks and uses the templates(html files) present in it.
+> Templates are controlled by Views.
+> to return templates, we use render from django.shortcuts
+> render
+
+
+
+

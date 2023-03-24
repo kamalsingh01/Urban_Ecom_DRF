@@ -1,0 +1,130 @@
+
+> Primary field list : (or preliminary field list) list of field for which we need to staore data in db.
+
+> List of Subjects: Entities that we have extracted from initial research before start of project. List of things which we want to store data about.
+
+> Mission Objective: Important is understanding the objective/goal of application and considering that DB/Model is designed and helps in feeding data in database.
+
+> System Requirements: What or app does, what data is generates and what data it Requires.
+
+---------------------------------------------
+
+> After generating primary field list using specification doc, it is iwasy to infer subjects or Entities.
+
+Entity: An entity is a single person, place or thing about which data can be stored. like product, employee, company.
+
+> Mission objectives and System Requirements specification we identified field list and list of subjects.
+
+> We finally get preliminary table list.
+
+> Followed by this process, we need to go through the process of removing duplicate items.
+
+> Product :  Product name, product description, product type.
+Product Line: product price, product image, product SKU, product stock quantity, product color, product size.
+
+----------------------------------------------------
+NOTE: Goal is to remove redundant data and we only needs to enter thr data only once.
+
+MULTIVALUED FIELD: field that stores multiple values and those needs to e removed from db
+
+> Identify the MULTIVALUED fields.
+> Removing the field from the main table and creating another table with the redundant data.
+> For attribute type of data fields we create a seperate table as Attribute: attribute_name, attribute_value
+
+FIELD CHECKLIST: 
+
+1. represents a dictinct characteristics of the subject of the table.
+2. containg onke a single values
+3. can't be decomposed.(address, name can be dcomposed.)
+4. should not contain calculated values.(or derived attributes)
+5. is a unique characteristic.
+
+TABLE CHECKLIST: 
+
+1. respresent a single subject/entity
+2. does not containg multipart fields
+3. does not contain multivalued fields
+4. does not containn calculatedfields
+5. does not contain duplicate fields.
+6. contains a minimal amount of redundant data.
+---------------------------------------------------
+
+NOTE: It is all about eing consistent across the whole database.
+
+TABLE NAMING GUIDLINES: 
+
+1. unique and meaningful/descriptive
+2. Identifies thhe subject/entity of table
+3. Minimum numer of words possible
+4. Avoid acronym and abbreviations
+5. Avoid restristing data entry
+6. Avoid plural names.
+
+sometime having some kind of prefix related to table name in field name is preferable in SQL.
+
+-----------------------------------------------------
+
+We create table from a Django Model. A django model is a class and table fields as referred as class variables, where class naming conventions apply.
+NOTE: Django uses appname and model classname to form the table name with underscore in between.
+
+-----------------------------------------------------
+
+Key is the way to uniquely identifying a tuple or a row in a table. Also it helps to create an maintain relationship amoung tables in a database.
+
+We need to consider any field which uniquely identifies the tuple, also it must be short in length.
+
+In Django framework, it automatically creates a table primary key as Id field(unique by default) when we migrate our tale after model creation and help user to focus only on data fields.
+
+PRIMARY KEY GUIDLINES:
+
+1. unique
+2. must not be multipart
+3. Is not an optional value
+4. Exclusively identify the record
+----------------------------------------------------------------------------------------------
+
+Field specification is defining what type of data(data type) any field will store.
+We also specify behaviours/constraintss on the data.
+IMP LINK : https://docs.djangoproject.com/en/4.1/ref/models/fields/
+
+text-> CharField
+URL -> CharField, validated by URL Validater
+numbers(whole numbers) -> IntegerField
+numbers(floating nums) -> DecimalField, we can specify precision range
+id(pk) field provided by Django will take 'BigAutoField' as firld type in Django model.
+
+image can be put using URL and for that ImageField is used.
+
+FIELD SPECIFICATION: 
+
+A.General : Name,description
+B.Physical Attriutes : Data type, Length, Decimal Places, Character type
+C. Logical Attributes : Key Type, Uniqueness(unique/non-unique in django model), Null Support, Input by(User,System), Required, Default(for no input given),  Value Range, Editing rules.
+----------------------------------------------------------------------------------------------
+
+Relationship exist b/w two tables when we can associate records between them.
+One must have the knowledge of the ojective of database to identify the relation among tales.
+
+GOAL IS TO IDENTIFY THE RELATIONSHIPS AND FINDING KEYS CONNECTING THEM.
+
+Types of Relationship: 
+
+1. ONE-TO-ONE
+2. ONE-TO-MANY
+3. MANY-TO-MANY
+
+ONE is represented as vertical line and MANY by fork
+
+> One category is related to one or many products, also one product can be connected to many categories. Hence, it can become many to many relationship.(this can change according to business model of the app)
+
+> for one product there can e multiple product lines, for many product lines, it can be connected to only one product.
+
+> for one image, there will be one product line. but for one product line, it can have multple images.
+
+NOTE:  Django automatically creates a link table for tables in many to many relationship
+
+In Django, we only need to define relationship from one side of the realtion not both sides.
+
+
+
+
