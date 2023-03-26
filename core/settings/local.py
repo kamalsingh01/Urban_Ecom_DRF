@@ -7,8 +7,13 @@ from .base import *
 
 #SQLite3 Config
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'urban_ecom',
+       'USER': 'kasin',
+       'PASSWORD': 'dockare22',
+       'HOST': '127.0.0.1',
+       'PORT': '5432',
+   }
 }
+

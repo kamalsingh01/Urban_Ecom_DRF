@@ -6,6 +6,7 @@ djangorestframework 3.4.0
 pytest 7.2.2
 pytest-django-4.5.2
 black==23.1.0
+django-mptt-0.14.0
 
 # Commaands
 

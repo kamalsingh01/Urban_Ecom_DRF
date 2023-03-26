@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Internal Apps
     'newapp',
+    'product',
     # External packages
     'rest_framework'
 ]
