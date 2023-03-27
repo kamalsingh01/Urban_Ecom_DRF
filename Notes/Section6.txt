@@ -46,3 +46,25 @@ After cloning we put all the project related data to the folder.
 . Some files that we do not need to push on version control, we put that files and folders in .gitignore file. So that every time we commit changes, thiose are ignored by git. Like .env file, __pycahce__ file , it needs to be ignored.
 
 > We add all the changes to staging area using : git add * and then commiting all the changes to main branch: git commit -m <message>
+
+> after successful commits we push the code to repository as: git push origin <branch_name>
+
+--------------------------------------------------------------------------------------------------------
+>We create our viewsets that is essentially the login where actual request from the client resides and is processed , ready for us to collect data then from database and then return it back to the client.
+
+>> VIEWSETS are class based views.
+
+NOTE: Request to API from client comes to Django server and then Django checks and matches with the URL present in the urls.py, if matched passes the object to the corresponding view.
+
+
+Django view can be defined using class as well as functions.
+
+Using Router in urls.py is automating the task for defining each path.
+> Each CRUD operations is an individual request and for each request, it potentially requires its own path. So with Router it automatically creates path for each request for us ased upon the informtation supplied within the code.
+> Paths to be created are utlized from viewsets as what type of viewsets we use
+> We use the info present in viewset to actually create the endpoints we need.
+--------------------------------------------------------------------------------------------------------
+
+API DOCUMENTATION: It is done using two components DRF Spectecular and Swagger UI which automate the process of API documentation.
+> DRF Spectecular collects all the information about the API and put that into a format which can the be utilized by a front end package i.e. Swagger UI that present that collected information to the other developers or anyone who wants to interact with our API. 
+

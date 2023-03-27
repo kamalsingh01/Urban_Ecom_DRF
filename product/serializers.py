@@ -6,7 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ["name"]
 
 class BrandSerializer(serializers.ModelSerializer):
     
@@ -15,7 +15,12 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class ProductSerializer(serializers.ModelSerializer):
-    
+    #fetching data from Brand & Category table to product table
+    #because we are using Brand data as foriegn key in product so that
+    #brand data also needs to be serialized,
+    brand = BrandSerializer()
+    Category = CategorySerializer()
+
     class Meta:
         model = Product
         fields = "__all__"
