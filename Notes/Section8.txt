@@ -1,0 +1,6 @@
+> More the tables and data inside them, more the no. of queries that run and the longer it takes to retrieve the data, passing it to front-end.
+> Hence, only option left is to reduce the number of queries, to actually shoerten the time taken for data retrieval.
+> We perform query inspection and connection module from django.db provides us tools for the inspection. Make sure DEBUG=True in settings.py
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+> Django Model Manager of ORM is used to interact with the database. Acc. to django doc., there is atleast one model manager for each model and we can sutomize managers too which will help optiomising the queries that we run on data.
+> Requirement of Custome Manager: easy modification of queryset that the manager returns and availability of extra custom methods to be applied on queryset.
