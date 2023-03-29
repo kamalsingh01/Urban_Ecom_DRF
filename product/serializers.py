@@ -1,28 +1,49 @@
 from rest_framework import serializers
 
-from .models import Category, Product, Brand
+from .models import Category, Product, Brand, ProductLine
 
 class CategorySerializer(serializers.ModelSerializer):
+    #serializer field name mapping
+    category_name = serializers.CharField(source='name')
     
     class Meta:
         model = Category
-        fields = ["name"]
+        fields = ["category_name"] #used to get name only
+        
 
 class BrandSerializer(serializers.ModelSerializer):
-    
+    brand_name = serializers.CharField(source='name')
     class Meta:
         model = Brand
-        fields = "__all__"
+        #fields = "__all__" - included all the fields
+        #exclude = ("id",)
+        fields = ["brand_name"]
+
+
+class ProductLineSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductLine
+        #fields = "__all__"
+        exclude = ("id","is_active","product")
 
 class ProductSerializer(serializers.ModelSerializer):
     #fetching data from Brand & Category table to product table
     #because we are using Brand data as foriegn key in product so that
     #brand data also needs to be serialized,
-    brand = BrandSerializer()
+    brand_name = serializers.CharField(source="brand.name")  #called Flattening
     Category = CategorySerializer()
+    product_line = ProductLineSerializer(many=True)  #Reverse relationhship in serializers
 
     class Meta:
         model = Product
-        fields = "__all__"
-
+        #fields = "__all__"
+        #exclude = ("id",)
+        fields = ("name",
+                  "slug",
+                  "description",
+                  "brand_name",
+                  "Category",
+                  "product_line",
+        )
 

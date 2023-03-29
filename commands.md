@@ -29,4 +29,10 @@ pip install pytest-django
 #schema testing
 python3 manage.py spectacular --file schema.yml
 
+# terminating active connection of any database 
+
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'my_DB';
+
 
