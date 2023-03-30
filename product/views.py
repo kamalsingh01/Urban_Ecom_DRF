@@ -24,7 +24,7 @@ class CategoryViewSet(viewsets.ViewSet):
     '''
     A simple viewset for viewing categories
     ''' 
-    queryset = Category.objects.all()
+    queryset = Category.objects.isactive()
     #we can define queryset once and can use it with all methods under the same class
     
     serializer_class = CategorySerializer
@@ -38,7 +38,7 @@ class BrandViewSet(viewsets.ViewSet):
     '''
     A simple viewset for viewing Brands
     ''' 
-    queryset = Brand.objects.all()
+    queryset = Brand.objects.isactive()
     serializer_class = BrandSerializer
     #print(queryset)
     
@@ -52,8 +52,12 @@ class ProductViewSet(viewsets.ViewSet):
     '''
     A simple viewset for viewing Products
     ''' 
-    queryset = Product.objects.all()
+    #queryset = Product.objects.all()       # default model manager
+    #queryset = Product.isactive_manager.all()  #Custom model manager
+    queryset = Product.objects.isactive()
     serializer_class = ProductSerializer
+
+
     lookup_field = "slug"
     #print(queryset)
         
