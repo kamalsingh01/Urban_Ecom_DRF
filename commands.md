@@ -12,6 +12,7 @@ coverage
 pytest-cov-4.0.0
 factory_boy-3.2.1 
 pytest-factoryboy-2.5.1
+pillow-9.4.0
 
 # Commaands
 
