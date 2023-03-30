@@ -62,7 +62,9 @@ class ProductViewSet(viewsets.ViewSet):
     #print(queryset)
         
     def retrieve(self,request, slug=None):
-        serializer = ProductSerializer(self.queryset.filter(slug=slug),many=True)
+        serializer = ProductSerializer(Product.objects.filter(slug=slug).select_related("Category","brand"),many=True)
+        # select_related works as include joins behind the scenes which allows us to combine rows from two or more table.
+        
         data = Response(serializer.data)
         #q = list(connection.queries)
         #print(len(q))
