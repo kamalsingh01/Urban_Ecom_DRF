@@ -4,3 +4,20 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 > Django Model Manager of ORM is used to interact with the database. Acc. to django doc., there is atleast one model manager for each model and we can sutomize managers too which will help optiomising the queries that we run on data.
 > Requirement of Custome Manager: easy modification of queryset that the manager returns and availability of extra custom methods to be applied on queryset.
+> Using the Manager we can modigy the initial queryset the manager returns.
+> Even after writing the code for model manager we need to apply it on intended models, else it won't work.
+> By default a default manager 'object' is used by all the models to get the initial queryset.
+> Changes weith cutom manager will be reflected on Admin portal too.Like if p2 is not active, it won't be visible on the Admin portal
+> Wer cannot use custom manager as default model manager cuz it will impact Admin portal too.
+> So rather we can define our default manager with a callable function. Also, we define our queryset once based on the custom manager and we can use it in multiple functions as required.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTE:  The RESTful API provides end points for the front-end to collect data, and then it will be the responsibility of the front-end or client application to then present the data to the user.
+
+CUSTOM FIELD ORDERED LIST: 
+
+> Now we are going to create an ordering system in the product line which will decide the ordering of the variants of a product. 
+> Approach 1 : We can add a Boolean field to product line, and whichever product variant is to be shown first will be marked as True.
+> Approach 2: We can add a custom field assigning a number to each product line which will decide the order of the product line. Cutome field is created using existing data type and consequently, each product line will have an order number. We also need to make sure that ordering numbers related to each product line must be connected to a particular product. These ordering numbers cannot be unique but can be specific to a product.
+> Adding a custom field means , taking an already existing field under models and then we can extend and include our own functionality, i.e. changing the beahivour of the data before actually being saved in the base field. For e.g., before data is inserted into the product line table, we ensure that order field in product line table is populated with the correct data.
+PROCEDURE: Get related product Lines -> Determin the last number used -> Save the new number.
+> 
